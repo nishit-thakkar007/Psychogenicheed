@@ -1,0 +1,200 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css1/chat.css' %}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+<body>
+    <section class="msger">
+        <header class="msger-header">
+            <div class="msger-header-title">
+                <i class="fas fa-comment-alt"></i> Psychogenic Heed
+                
+            </div>
+            
+            <div class="msger-header-options">
+          
+               <i class="fas fa-cog"></i><button id="backButton" class="btn btn-success" style="width: 60px;">Back</button>
+            </div>
+        </header>
+
+        <main class="msger-chat" id="chat-container">
+            
+            <div class="msg right-msg" >
+                <div class="msg-img" style="background-image: url()">
+                </div>
+                <div class="msg-bubble">
+                    <div class="msg-info">
+                        <div class="msg-info-name"></div>
+                        <div class="msg-info-time" id="response-container"></div>
+                    </div>
+                    <div class="msg-text" >
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="msg left-msg">
+                <div class="msg-img" style="background-image: url()">
+                </div>
+                <div class="msg-bubble">
+                    <div class="msg-info">
+                        <div class="msg-info-name">Psychogenic Heed Bot</div>
+                    </div>
+                    <div class="msg-text" id="openai-response">
+                    </div>
+                      <div class="msg left-msg" id="openai-response">
+                        <!-- Existing ChatBot message -->
+                    </div>
+                    
+                </div>
+            </div>
+
+        </main>
+
+        <form class="msger-inputarea">
+            <input type="text" class="msger-input" placeholder="Enter your message..." id="typedprompt">
+            
+
+            {% csrf_token %}
+            <button type="submit" class="msger-send-btn" id="submit">Send</button>
+           
+            <button id="voice-input-btn"><img src="{% static 'images//60955.png' %}" style="width:50px;" ></button>
+        </form>
+    </section>
+</body>
+</html>
+
+<script>
+    const csrfmiddlewaretoken = document.querySelector("input[type=hidden]").value;
+    const submitButton = document.getElementById('submit');
+    const submitButton1 = document.getElementById('submit1');
+    const fetchData = async (myPrompt) => {
+        const data = new FormData();
+        data.append('prompt', myPrompt);
+        data.append('csrfmiddlewaretoken', csrfmiddlewaretoken);
+
+        const response = await fetch("/api", {
+            method: 'POST',
+            body: data,
+            credentials: 'same-origin',
+        });
+
+        if (response.ok) {
+            const responseData = await response.json();
+            return responseData;
+        }
+        return null; // Handle errors appropriately
+    }
+    const username = "{{user.username}}:";
+    
+    
+    submitButton.addEventListener("click", async (e) => {
+    e.preventDefault();
+    const typedPrompt = document.querySelector(".msger-input").value;
+    let myPrompt = username + typedPrompt + "\n psychogenic Heed";
+    document.getElementById("response-container").innerText = myPrompt;
+
+    // Fetch and display responses
+    const response = await fetchData(myPrompt);
+    if (response) {
+        document.getElementById("openai-response").innerText += response["choices"][0].text;
+    } 
+});
+
+   
+
+    // JavaScript code to fetch and display OpenAI responses
+    window.addEventListener('DOMContentLoaded', async () => {
+        const openaiResponseElement = document.getElementById('openai-response');
+        openaiResponseElement.innerHTML = '';
+        const fetchDataOnLoad = async () => {
+            const response = await fetch('/api'); // Use the correct URL path for your API endpoint
+            if (response.ok) {
+                const responseData = await response.json();
+                const openaiResponseText = responseData["choices"][0].text;
+    const openaiResponseTextNode = document.createTextNode(openaiResponseText);
+    openaiResponseElement.appendChild(openaiResponseTextNode);
+            }
+            
+        };
+
+        // Fetch and display responses when the page loads
+        await fetchDataOnLoad();
+    });
+
+    document.getElementById('voice-input-btn').addEventListener('click', async (e) => {
+        e.preventDefault();
+    const voiceInputText = await transcribeSpeech();
+    console.log(voiceInputText)
+    if (voiceInputText) {
+        // Update the value of the textarea with the transcribed text
+        document.getElementById('typedprompt').value = voiceInputText;
+    }
+});
+
+async function transcribeSpeech() {
+    try {
+        const response = await fetch('/voice');
+        console.log('Voice input response:', response);
+
+        if (response.ok) {
+            const responseData = await response.json();
+            console.log('Voice input data:', responseData);
+
+            const voiceInputText = responseData.transcription;
+            console.log('Transcribed text:', voiceInputText);
+
+            // Replace newline characters with spaces for better formatting in textarea
+            const formattedText = voiceInputText.replace(/\n/g, ' ');
+
+            return formattedText;
+        } else {
+            console.error('Error fetching voice input:', response.statusText);
+            return null;
+        }
+    } catch (error) {
+        console.error('Error fetching voice input:', error);
+        return null;
+    }
+}
+const chatContainer = document.getElementById('chat-container');
+
+submitButton.addEventListener("click", async (e) => {
+    e.preventDefault();
+    const typedPrompt = document.querySelector(".msger-input").value;
+    let userMessage = username + typedPrompt;
+    displayMessage('right', userMessage);
+
+    // Fetch and display responses
+    const response = await fetchData(userMessage);
+    if (response) {
+        const openaiResponse = response["choices"][0].text;
+        displayMessage('left', openaiResponse);
+    }
+});
+
+function displayMessage(side, message) {
+    const msgDiv = document.createElement('div');
+    msgDiv.className = `msg ${side}-msg`;
+
+    msgDiv.innerHTML = `
+        <div class="msg-img" style="background-image: url()"></div>
+        <div class="msg-bubble">
+            <div class="msg-info">
+                <div class="msg-info-name">${side === 'left' ? 'Psycogenic Heed Bot' : ''}</div>
+            </div>
+            <div class="msg-text">${message}</div>
+        </div>
+    `;
+
+    chatContainer.appendChild(msgDiv);
+}
+
+document.getElementById('backButton').addEventListener('click', function() {
+    // Open the first URL in a new tab or window
+    window.open("{% url 'download_chat_data' user_id=request.user.id %}", "_blank");
+
+    // Open the second URL in the current tab or window
+    window.location.href = "{% url 'home' %}";
+});
+
+
+
+</script>

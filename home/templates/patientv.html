@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <script>
+        async function acceptAppointment(email) {
+            console.log('Accept Appointment button clicked.');
+
+            try {
+                const response = await fetch('send_email/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': document.getElementsByName('csrfmiddlewaretoken')[0].value,
+                    },
+                    body: JSON.stringify({ email }),
+                });
+
+                const result = await response.json();
+                console.log(result);
+
+                // Add any additional logic based on the response (success/error)
+                if (result.status === 'success') {
+                    alert('Email sent successfully!');
+                } else {
+                    alert('Error sending email. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again.');
+            }
+        }
+    </script>
+    <title>Patient Appointments</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        /* Custom CSS styles */
+        body {
+            background: #F0F0F0; /* Background color */
+        }
+        .container {
+            background-image: url('your-image-url.jpg'); /* Background image */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        .appointment-card {
+            background-color: rgba(255, 255, 255, 0.9); /* Card background color with transparency */
+            border-radius: 5px;
+            padding: 15px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+
+    <section class="section">
+        <div class="container">
+            <h1 class="title">Patient Appointments</h1>
+            <div class="columns is-multiline">
+                {% for book in doctor %}
+                <div class="column is-one-third">
+                    <div class="appointment-card animate__animated animate__fadeInUp">
+                        <h2 class="title is-4">{{ book.name }}</h2>
+                        <p><strong>Mobile Number:</strong> {{ book.mobilenum }}</p>
+                        <p><strong>Email:</strong> {{ book.email }}</p>
+                        <p><strong>Date:</strong> {{ book.date }}</p>
+                        <form method="post" action="{% url 'delete_book' book.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="button is-danger">Cancel Booking</button>
+                            <button type="button" class="button is-success" onclick="acceptAppointment('{{ book.email }}')">Accept Appointment</button>
+
+                        </form>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+</body>
+</html>

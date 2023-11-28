@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Your existing head content -->
+
+    <script>
+        function acceptAppointment(email) {
+            console.log('Accept Appointment button clicked.');
+            // ... rest of your code
+        }
+    </script>
+</head>
+<body>
+    <!-- Your existing body content -->
+
+    <!-- Ensure that the CSRF token is included in the template -->
+    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+
+</body>
+</html>

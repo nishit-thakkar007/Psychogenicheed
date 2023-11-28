@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doctor's Prescription</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+header {
+  background-color: #3993e8;
+  color: #fff;
+  text-align: center;
+  padding: 20px 0;
+}
+
+main {
+  padding: 20px;
+}
+
+.prescription {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.prescription h2 {
+  margin-top: 20px;
+}
+
+.medicine {
+  font-weight: bold;
+}
+
+.instructions {
+  font-style: italic;
+  color: #666;
+}
+
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Doctor's Prescription</h1>
+  </header>
+  
+  <main>
+    <section class="prescription">
+      <h2>Patient Information</h2>
+      <p><strong>Name:</strong>{{user.username}}</p>
+
+      
+      <h2>Medication</h2>
+      <ul>
+        {% for prescription in prescription_details %}
+        <span class="medicine">-> {{ prescription.prescription }}</span>   
+        {% empty %}
+     <li>No prescription details found.</li>
+        {% endfor %}
+      </ul>
+      
+      <h2>Instructions</h2>
+      <p class="instructions">Take with meals. Avoid alcohol.</p>
+    </section>
+  </main>
+  <a href="{% url 'home' %}" style="text-decoration:none;color:Blue;margin-left:80px;">Back</a>
+</body>
+</html>

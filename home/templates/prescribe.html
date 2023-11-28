@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Patient Appointments</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        /* Custom CSS styles */
+        body {
+            background: #F0F0F0; /* Background color */
+        }
+        .container {
+            background-image: url('your-image-url.jpg'); /* Background image */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        .appointment-table {
+            background-color: rgba(255, 255, 255, 0.9); /* Table background color with transparency */
+            border-radius: 5px;
+            padding: 15px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <section class="section">
+        <div class="container">
+            <h1 class="title">Prescription Details</h1>
+            <div class="columns is-multiline">
+                <div class="column is-full">
+                    <div class="appointment-table animate__animated animate__fadeInUp">
+                        <table class="table is-fullwidth">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Mobile Number</th>
+                                    <th>Email</th>
+                                    <th>Date</th>
+                                    <th>Prescription</th>
+                                    <th>View Report</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for book in doctor %}
+                                <tr>
+                                    <td>{{ book.name }}</td>
+                                    <td>{{ book.mobilenum }}</td>
+                                    <td>{{ book.email }}</td>
+                                    <td>{{ book.date }}</td>
+                                    <td>
+                                        <form method="post" action="{% url 'save_prescription' book.id %}">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="patient_id" value="{{ book.id }}">
+                                            <input type="hidden" name="doctor_id" value="{{ book.doctor.id }}">
+                                            <input type="text" style="height:40px;" class="editable-prescription" name="prescription" value="{{ book.prescription }}">
+                                            <button type="submit" class="button is-primary">Save</button>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <a href="{% url 'analyze_sentiment' %}" class="button is-primary" style="width:100px;">View report</a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

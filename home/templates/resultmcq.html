@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f0f0f0;
+    }
+
+  </style>
+  <title>MCQ Example</title>
+</head>
+{%load static%}
+<body>
+    <div style="width:450px;height:300px;background-color:white;margin-left:500px;margin-top:200px;border-radius: 50px;box-shadow: 10px 10px 20px rgb(199, 199, 199);">
+        {% if messages %}
+              <div class="alert alert-danger" role="alert">
+                {% for message in messages %}
+                <br><br>
+                <b style="color:green;margin-left:160px;font-size:28px;">
+                {{ message }}</b>
+                {% endfor %}<br><br>
+                <img src="{% static 'images/selfcare.gif' %}" style="width:128px;height:128px;margin-left: 160px;">
+              </div>
+              <span style="color:green;margin-left:110px;font-size:20px;">You have no mental illness</span>
+              {% endif %}
+    </div>
+</body>
+</html>

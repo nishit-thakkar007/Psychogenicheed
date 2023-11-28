@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'style.css' %}">
+
+<div class="container">
+	<div class="screen">
+		<div class="screen__content">
+			<form method="post" action="#" enctype="multipart/form-data" class="login">
+                {% csrf_token %}
+            
+				<div class="login__field">
+					<i class="login__icon fas fa-user"></i>
+					<label for="username">Username</label>
+                      {{ form.username }}
+				</div>
+				<div class="login__field">
+					<i class="login__icon fas fa-lock"></i>
+					<label for="username">Password</label>
+                    {{ form.password }}
+				</div>
+				<div class="login__field">
+					<label>Select Type : </label>
+					{{ form.type }}
+				</div>
+				<button class="button login__submit" type="submit">
+					<span class="button__text">Log In Now</span>
+					<i class="button__icon fas fa-chevron-right"></i>
+				</button>				
+			</form>
+			
+			<div class="social-login">
+			
+				<h3>log in via</h3>
+				<div class="social-icons">
+					<a href="#" class="social-login__icon fab fa-instagram"></a>
+					<a href="#" class="social-login__icon fab fa-facebook"></a>
+					<a href="#" class="social-login__icon fab fa-twitter"></a>
+				</div>
+				<a href="{% url 'reset_password'%}">Forgot Password</a>
+			</div>
+		</div>
+		<div class="screen__background">
+			<span class="screen__background__shape screen__background__shape4"></span>
+			<span class="screen__background__shape screen__background__shape3"></span>		
+			<span class="screen__background__shape screen__background__shape2"></span>
+			<span class="screen__background__shape screen__background__shape1"></span>
+		</div>		
+	</div>
+</div>
+{% endblock %}
+
+
+
+

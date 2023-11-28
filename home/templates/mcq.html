@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f0f0f0;
+    }
+    form {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .question {
+      margin-bottom: 20px;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.1);
+      background-color: #f9f9f9;
+    }
+    .question span {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 10px;
+      color: #333;
+    }
+    .option {
+      margin-bottom: 8px;
+    }
+    .option label {
+      display: block;
+      margin-bottom: 5px;
+      cursor: pointer;
+    }
+    .option input {
+      margin-right: 10px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 16px;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+  <title>MCQ Example</title>
+</head>
+<body>
+  <form action="{% url 'mcq_save' user_id=request.user.id %}" method="post" >
+    {% csrf_token %}
+  <center><h2 style="color:green;">MCQ Test</h2></center>
+  <div class="question">
+    <br>
+    <span name="q">I have trouble starting conversations</span><br>
+    <label class="option"><input type="radio" name="a" value="no" required> No</label><br>
+    <label class="option"><input type="radio" name="a" value="yes" required> Yes</label><br>
+    
+  </div>
+
+  <div class="question">
+    <span name="q">I don't love being around other people</span><br>
+    
+    <label class="option"><input type="radio" name="b" value="no"> No</label><br>
+    <label class="option"><input type="radio" name="b" value="yes"> Yes</label><br>
+  </div>
+  
+ <div class="question">
+    <span> During the past 4 weeks, have you had any problems with your work or daily life due to your physical health?</span><br>
+    <label class="option">
+      <input type="radio" name="c" value="no"> No
+    </label><br>
+    <label class="option">
+      <input type="radio" name="c" value="yes"> Yes
+    </label><br>
+  </div>
+
+  <div class="question">
+    <span name="q">I prefer to avoid confrontation</span><br>
+    <label class="option">
+      <input type="radio" name="d" value="no"> No
+    </label><br>
+    <label class="option">
+      <input type="radio" name="d" value="yes"> Yes
+    </label><br>
+  </div>
+
+  <div class="question">
+    <span name="q">Have you felt particularly low or down for more than 2 weeks in a row?</span><br>
+    <label class="option">
+      <input type="radio" name="e" value="no"> No
+    </label><br>
+    <label class="option">
+      <input type="radio" name="e" value="yes"> Yes
+    </label>
+  </div>
+
+  <div class="question">
+    <span name="q">I can not do my best to get along with everyone</span><br>
+    <label class="option">
+      <input type="radio" name="f" value="no"> No
+    </label><br>
+    <label class="option">
+      <input type="radio" name="f" value="yes"> Yes
+    </label>
+  </div>
+  <div class="question">
+    <span name="q">I am not organised in my life</span><br>
+    <label class="option">
+      <input type="radio" name="g" value="no"> No
+    </label><br>
+    <label class="option">
+      <input type="radio" name="g" value="yes"> Yes
+    </label>
+  </div>
+  <div class="question">
+    <span name="q">Are you going through a tough emotional situation?</span><br>
+    <label class="option">
+      <input type="radio" name="h" value="no"> No
+    </label><br>
+    <label class="option">
+      <input type="radio" name="h" value="yes"> Yes
+    </label>
+  </div>
+  <div class="question">
+    <span name="q">Do you feel content with your relationships and family?</span><br>
+    <label class="option">
+      <input type="radio" name="i" value="no"> No
+    </label><br>
+    <label class="option">
+      <input type="radio" name="i" value="yes"> Yes
+    </label>
+  </div>
+  <div class="question">
+    <span name="q">I have difficulty sharing my problems with anyone.</span><br>
+    <label class="option">
+      <input type="radio" name="j" value="no"> No
+    </label><br>
+    <label class="option">
+      <input type="radio" name="j" value="yes"> Yes
+    </label>
+  </div>
+    <button type="submit" id="backButton">Submit</button>
+  </div>
+  </form>
+</body>
+</html>

@@ -1,0 +1,619 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Pyschogenis Heed</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- <link rel="manifest" href="site.webmanifest"> -->
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
+    <!-- Place favicon.ico in the root directory -->
+    {%load static %}
+    <!-- CSS here -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css'%}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css'%}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css'%}">
+    <link rel="stylesheet" href="{% static 'css/themify-icons.css'%}">
+    <link rel="stylesheet" href="{% static 'css/nice-select.css'%}">
+    <link rel="stylesheet" href="{% static 'css/flaticon.css'%}">
+    <link rel="stylesheet" href="{% static 'css/gijgo.css'%}">
+    <link rel="stylesheet" href="{% static 'css/animate.css'%}">
+    <link rel="stylesheet" href="{% static 'css/slicknav.css'%}">
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+    <!-- <link rel="stylesheet" href="css/responsive.css"> -->
+</head>
+
+<body>
+    <!--[if lte IE 9]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+        <![endif]-->
+
+
+    <!-- header-start -->
+    <header>
+        <div class="header-area ">
+            <div id="sticky-header" class="main-header-area">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-xl-3 col-lg-3">
+                            <div class="logo-img">
+                                <a href="index.html">
+                                    <img src="img/logo.png" alt="">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xl-9 col-lg-9">
+                            <div class="menu_wrap d-none d-lg-block">
+                                <div class="menu_wrap_inner d-flex align-items-center justify-content-end">
+                                    <div class="main-menu">
+                                      
+                                        <nav>
+                                            <ul id="navigation">
+                                                
+                                                <li><a>{{ user.username }}</a></li>
+                                                <li><a>  {% if user.userProfile  %}
+                                                    <a href="{% url 'profile' %}"><img src="{{user.userProfile.url}}" style="width: 50px;height:50px;border-radius: 50%;"></a>
+                                                    {%else%}
+                                                    <h6>Error</h6>
+                                                    {% endif %} </a></li>
+                                                <li><a href="index.html">home</a></li>
+                                                <li><a href="{% url 'about' %}">About</a></li>
+                                                <li><a href="contact.html">Contact</a></li>
+
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                   
+                                    
+                               
+                                    <div class="book_room">
+                                        <div class="book_btn">
+                                            <a  href="{% url 'bookappoint' %}">Book  Appointment</a>
+                                        </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <div style="background-color: white;width:80px;text-align: center;text-decoration: none;border-radius: 10px;">
+                                        <li><a href="{% url 'logout' %}" style="color:black;">Logout</a></li></div>
+                                    </div>
+                                   
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="mobile_menu d-block d-lg-none"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- header-end -->
+
+    <!-- slider_area_start -->
+    <div class="slider_area">
+        <div class="slider_active owl-carousel">
+            <div class="single_slider  d-flex align-items-center slider_bg_1 overlay">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="slider_text ">
+                                <span>Bringing mental health<br>
+                                to life.</span>
+                                <h3>Talk to chatbot freely <span> for knowing problem</h3>
+                                <a href="{% url 'chatbot' %}" class="boxed-btn5">Chatbot
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- slider_area_end -->
+
+    <!-- welcome_clicnic_area_start -->
+    <div class="welcome_clicnic_area">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-xl-6 col-lg-6">
+                    <div class="welcome_thumb">
+                        <div class="thumb_1">
+                            <img src="{% static 'img/about/1.jpg'%}" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6">
+                    <div class="welcome_docmed_info">
+                        <h3>Welcome To
+                            <span>Psychogenic Heed</span></h3>
+                        <p>At PsychogenicHeed, our mission is to support and nurture mental well-being. We understand that mental health is a vital aspect of an individual's overall health and quality of life. Our team is dedicated to providing you with the knowledge, tools, and resources needed to navigate the complexities of the human mind.</p>
+                       
+                        <a href="{% url 'about' %}">About us</a>
+                        <a class="boxed-btn6" href="{% url 'view_app_detail' %}">view Appointment</a>
+                        <a class="boxed-btn6" href="{% url 'pre' %}">Doctor Prescription</a>
+                        <a class="boxed-btn6" href="{% url 'mcq' user_id=request.user.id %}">Mcq</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- welcome_clicnic_area_end -->
+
+    <!-- depertment_area_start  -->
+    <div class="depertment_area">
+        <div class="container">
+            <div class="row custom_align align-items-end justify-content-between">
+                <div class="col-lg-6">
+                    <div class="section_title">
+                        <h3>Types of Mental Illness</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="learn_more_btn text-right">
+                        <a href="#" class="boxed-btn">Learn more</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="depart_ment_tab mb-30">
+                        <ul class="nav" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">
+                                    <i ></i>
+                                    <h4>Deperssion</h4>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">
+                                    <i class="lonliness"></i>
+                                    <h4>Bipolar disorder</h4>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">
+                                    <i></i>
+                                    <h4>Stress</h4>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="Astrology-tab" data-toggle="tab" href="#Astrology" role="tab" aria-controls="contact" aria-selected="false">
+                                    <h4>Anxiety</h4>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="Neuroanatomy-tab" data-toggle="tab" href="#Neuroanatomy" role="tab" aria-controls="contact" aria-selected="false">
+                                    
+                                    <h4>Schizophrenia</h4>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="Blood-tab" data-toggle="tab" href="#Blood" role="tab" aria-controls="contact" aria-selected="false">
+                                    <h4>Mood Disorders</h4>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="dept_main_info white-bg">
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <!-- single_content  -->
+                        <div class="row align-items-center">
+                            <div class="col-lg-5">
+                                <div class="dept_thumb">
+                                    <img src="{% static 'img/department/2.jpg'%}" alt="">
+                                </div>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="dept_info">
+                                    <h3>Depression</h3 >
+                                    <p>Depression is different from regular mood changes and feelings about everyday life. It can affect all aspects of life, including relationships with family, friends and community. It can result from or lead to problems at school and at work.
+
+                                        Depression can happen to anyone. People who have lived through abuse, severe losses or other stressful events are more likely to develop depression. Women are more likely to have depression than men.</p>
+                                    <a href="#" class="boxed-btn">Make An Appointment</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- single_content  -->
+                    </div>
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <!-- single_content  -->
+                        <div class="row align-items-center">
+                            <div class="col-lg-5">
+                                <div class="dept_thumb">
+                                    <img src="{% static 'img/department/3.jpg'%}" alt="">
+                                </div>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="dept_info">
+                                    <h3>Bipolar disorder</h3 >
+                                    <p>Bipolar disorder, previously known as manic depression, is a mental disorder characterized by periods of depression and periods of abnormally elevated mood that each last from days to weeks. </p>
+                                    <a href="{% url 'bookappoint' %}" class="boxed-btn">Make An Appointment</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- single_content  -->
+                    </div>
+                    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                    <!-- single_content  -->
+                    <div class="row align-items-center">
+                        <div class="col-lg-5">
+                            <div class="dept_thumb">
+                                <img src="{% static 'img/department/4.jpg'%}" alt="">
+                            </div>
+                        </div>
+                        <div class="col-lg-7">
+                            <div class="dept_info">
+                                <h3>Stress</h3 >
+                                <p>stress disorder is a mental and behavioral disorder that develops from experiencing a traumatic event, such as sexual assault, warfare, traffic collisions, child abuse, domestic violence, or other threats on a person's life or well-being.</p>
+                                <a href="{% url 'bookappoint' %}"class="boxed-btn">Make An Appointment</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- single_content  -->
+                    </div>
+                    <div class="tab-pane fade" id="Astrology" role="tabpanel" aria-labelledby="Astrology-tab">
+                        <!-- single_content  -->
+                        <div class="row align-items-center">
+                            <div class="col-lg-5">
+                                <div class="dept_thumb">
+                                    <img src="{% static 'img/department/5.jpg'%}" alt="">
+                                </div>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="dept_info">
+                                    <h3>Anxiety</h3 >
+                                    <p>Anxiety disorders are a cluster of mental disorders characterized by significant and uncontrollable feelings of anxiety and fear such that a person's social, occupational, and personal function are significantly impaired. </p>
+                                    <a href="{% url 'bookappoint' %}" class="boxed-btn">Make An Appointment</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- single_content  -->
+                    </div>
+                    <div class="tab-pane fade" id="Neuroanatomy" role="tabpanel" aria-labelledby="Neuroanatomy-tab">
+                        <!-- single_content  -->
+                        <div class="row align-items-center">
+                            <div class="col-lg-5">
+                                <div class="dept_thumb">
+                                    <img src="{% static 'img/department/6.jpg'%}" alt="">
+                                </div>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="dept_info">
+                                    <h3>Schizophrenia</h3 >
+                                    <p>Schizophrenia is a mental disorder characterized by continuous or relapsing episodes of psychosis. Major symptoms include hallucinations, delusions and disorganized thinking. Other symptoms include social withdrawal and flat affect.</p>
+                                    <a href="{% url 'bookappoint' %}" class="boxed-btn">Make An Appointment</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- single_content  -->
+                    </div>
+                    <div class="tab-pane fade" id="Blood" role="tabpanel" aria-labelledby="Blood-tab">
+                    <!-- single_content  -->
+                    <div class="row align-items-center">
+                        <div class="col-lg-5">
+                            <div class="dept_thumb">
+                                <img src="{% static 'img/department/7.jpg'%}" alt="">
+                            </div>
+                        </div>
+                        <div class="col-lg-7">
+                            <div class="dept_info">
+                                <h3>Mood Disorders</h3 >
+                                <p>A mood disorder, also known as an affective disorder, is any of a group of conditions of mental and behavioral disorder where a disturbance in the person's mood is the main underlying feature.</p>
+                                <a href="{% url 'bookappoint' %}" class="boxed-btn">Make An Appointment</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- single_content  -->
+                    </div>
+                  </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- depertment_area_end  -->
+
+    <!-- expert_doctors_area_start -->
+    <div class="expert_doctors_area">
+        <div class="container">
+            <div class="row justify-content-center ">
+                <div class="col-lg-6">
+                    <div class="section_title mb-55 text-center">
+                        <h3>Our Doctors</h3>
+        
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-4 col-md-6">
+                    <div class="single_expert">
+                        <div class="expert_thumb">
+                            <img src="img/experts/1.png" alt="">
+                        </div>
+                        <div class="experts_name text-center">
+                            <h3>Dr.Nitin</h3>
+                            <span>Psychiatrists</span>
+                            <div class="social_links">
+                                <ul>
+                                    <li>
+                                        <a href="#"> <i class="fa fa-facebook"></i> </a>
+                                    </li>
+                                    <li>
+                                        <a href="#"> <i class="fa fa-linkedin"></i> </a>
+                                    </li>
+                                    <li>
+                                        <a href="#"> <i class="fa fa-twitter"></i> </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="single_expert">
+                        <div class="expert_thumb">
+                            <img src="img/experts/2.png" alt="">
+                        </div>
+                        <div class="experts_name text-center">
+                            <h3>Dr.Sunil</h3>
+                            <span>psychiatrist</span>
+                            <div class="social_links">
+                                <ul>
+                                    <li>
+                                        <a href="#"> <i class="fa fa-facebook"></i> </a>
+                                    </li>
+                                    <li>
+                                        <a href="#"> <i class="fa fa-linkedin"></i> </a>
+                                    </li>
+                                    <li>
+                                        <a href="#"> <i class="fa fa-twitter"></i> </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="single_expert">
+                        <div class="expert_thumb">
+                            <img src="img/experts/3.png" alt="">
+                        </div>
+                        <div class="experts_name text-center">
+                            <h3>Dr.Chavla</h3>
+                            <span>psychiatrist</span>
+                            <div class="social_links">
+                                <ul>
+                                    <li>
+                                        <a href="#"> <i class="fa fa-facebook"></i> </a>
+                                    </li>
+                                    <li>
+                                        <a href="#"> <i class="fa fa-linkedin"></i> </a>
+                                    </li>
+                                    <li>
+                                        <a href="#"> <i class="fa fa-twitter"></i> </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- expert_doctors_area_end -->
+
+    <div class="book_apointment_area">
+        <div class="container">
+            <div class="row justify-content-end">
+                <div class="col-lg-7">
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- quality_area_start  -->
+    <div class="quality_area">
+        <div class="container">
+            <div class="row justify-content-center ">
+                <div class="col-lg-6">
+                    <div class="section_title mb-55 text-center">
+                        <h3>Quality Health</h3>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="single_quality">
+                        <div class="icon">
+                            <i class="flaticon-customer-service"></i>
+                        </div>
+                        <h3>Health Consultation</h3>
+                        <p>Are you looking for personalized guidance and support on your journey to better health and well-being? Our dedicated team of experienced health consultants is here to empower you with the knowledge, tools, and motivation to achieve your health goals.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="single_quality">
+                        <div class="icon">
+                            <i class="flaticon-find"></i>
+                        </div>
+                        <h3>Find Mental Health</h3>
+                        <p>At Psychogenic Heed, we understand the profound importance of mental health in your overall well-being. We're committed to providing a range of comprehensive mental health features to help you navigate the complexities of the human mind, address mental health challenges, and foster emotional well-being.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="single_quality">
+                        <div class="icon">
+                            <i class="flaticon-doctor"></i>
+                        </div>
+                        <h3>Talk to chatbot</h3>
+                        <p>we recognize the importance of accessible and immediate support when it comes to mental health. Our "Chatbot" feature is designed to offer you an informative, empathetic, and non-judgmental conversation partner for understanding and addressing mental illness.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- quality_areaend  -->
+
+    <!-- Emergency_contact start -->
+    <div class="Emergency_contact">
+        <div class="Emergency_contact_inner ">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6">
+                        <div class="single_emergency">
+                            <div class="info">
+                                <span>We are here for you</span>
+                                <h3>Book Appointment</h3>
+                            </div>
+                            <div class="info_button">
+                                <a href="{% url 'bookappoint' %}" class="boxed-btn3-white">Book Appointment
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="single_emergency align-items-center d-flex justify-content-end">
+                            <div class="icon">
+                                <i class="flaticon-call"></i>
+                            </div>
+                            <div class="info">
+                                <span>Emergency Medical Care</span>
+                                <h3>+1-465 4545</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Emergency_contact end -->
+
+    <footer class="footer">
+        <div class="footer_top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-4 col-md-6 col-lg-4 ">
+                        <div class="footer_widget">
+                            <div class="footer_logo">
+                                <a href="#">
+                                    <img src="img/logo.png" alt="">
+                                </a>
+                            </div>
+                            <p class="address_text">We're dedicated to making mental health<br> resources and support easily accessible <br>to you. Connect with us on various<br> social media platforms to stay updated, <br>engage in conversations, and be a part of <br>our growing community.
+                            </p>
+                            <div class="socail_links">
+                                <ul>
+                                    <li>
+                                        <a href="#">
+                                            <i class="ti-facebook"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="ti-twitter-alt"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-dribbble"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-instagram"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-6 col-lg-4">
+                        <div class="footer_widget">
+                            <h3 class="footer_title">
+                                Types of Mental illness
+                            </h3>
+                            <ul class="links">
+                                <li><a href="#">Depression</a></li>
+                                <li><a href="#">Bipolar Disorder</a></li>
+                                <li><a href="#">Stress</a></li>
+                                <li><a href="#">Anxiety</a></li>
+                                <li><a href="#">Schizophrenia</a></li>
+                                <li><a href="#">Mood Disorder</a></li>
+                                <li><a href="#">Obsessive–compulsive disorder</a></li>
+                                <li><a href="#">Personality disorders</a></li>
+                                <li><a href="#">Psychosis</a></li>
+                          
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-4  col-md-6 col-lg-4">
+                        <div class="footer_widget">
+                            <h3 class="footer_title">
+                                We’re Available
+                            </h3>
+                            <ul class="meting_time">
+                                <li class="d-flex justify-content-between "><span>Monday - Friday</span> <span>8.00 - 18.00</span></li>
+                                <li class="d-flex justify-content-between "><span>Saturday	</span> <span>8.00 - 18.00</span></li>
+                                <li class="d-flex justify-content-between "><span>Sunday</span> <span>8.00 - 13.00</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copy-right_text">
+            <div class="container">
+                <div class="row">
+                    <div class="bordered_1px "></div>
+                    <div class="col-xl-12">
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- link that opens popup -->
+
+    <!-- form itself end-->
+    
+
+    <!-- JS here -->
+    <script src="{% static 'js/vendor/modernizr-3.5.0.min.js'%}"></script>
+    <script src="{% static 'js/vendor/jquery-1.12.4.min.js'%}"></script>
+    <script src="{% static 'js/popper.min.js'%}"></script>
+    <script src="{% static 'js/bootstrap.min.js'%}"></script>
+    <script src="{% static 'js/owl.carousel.min.js'%}"></script>
+    <script src="{% static 'js/isotope.pkgd.min.js'%}"></script>
+    <script src="{% static 'js/ajax-form.js'%}"></script>
+    <script src="{% static 'js/waypoints.min.js'%}"></script>
+    <script src="{% static 'js/jquery.counterup.min.js'%}"></script>
+    <script src="{% static 'js/imagesloaded.pkgd.min.js'%}"></script>
+    <script src="{% static 'js/scrollIt.js'%}"></script>
+    <script src="{% static 'js/jquery.scrollUp.min.js'%}"></script>
+    <script src="{% static 'js/wow.min.js'%}"></script>
+    <script src="{% static 'js/nice-select.min.js'%}"></script>
+    <script src="{% static 'js/jquery.slicknav.min.js'%}"></script>
+    <script src="{% static 'js/jquery.magnific-popup.min.js'%}"></script>
+    <script src="{% static 'js/plugins.js'%}"></script>
+    <script src="{% static 'js/gijgo.min.js'%}"></script>
+    <!--contact js-->
+    <script src="{% static 'js/contact.js'%}"></script>
+    <script src="{% static 'js/jquery.ajaxchimp.min.js'%}"></script>
+    <script src="{% static 'js/jquery.form.js'%}"></script>
+    <script src="{% static 'js/jquery.validate.min.js'%}"></script>
+    <script src="{% static 'js/mail-script.js'%}"></script>
+
+    <script src="{% static 'js/main.js'%}"></script>
+
+</body>
+
+</html>
